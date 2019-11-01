@@ -1,0 +1,21 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: fib
+  password: password1
+
+development:
+  <<: *default
+  database:  fib_development
+
+test:
+  adapter: sqlite3
+  encoding: unicode
+  database: test
+  pool: 5
+
+production:
+  <<: *default
+  database: fib_production
