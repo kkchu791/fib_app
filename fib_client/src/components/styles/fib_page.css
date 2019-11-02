@@ -1,0 +1,36 @@
+
+.fib-actions {
+  margin: 10px;
+}
+
+.btn {
+  margin: 0 5px;
+}
+
+.auth-section {
+  float: right;
+}
+
+
+.fib-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Titillium Web', sans-serif !important;
+
+}
+
+.fib-display {
+
+  border: 20px solid #C9C4C3;
+  padding: 40px;
+  width: 60%;
+  min-height: 575px;
+  position: absolute;
+  top: 50%;
+   -ms-transform: translateY(-50%);
+   transform: translateY(-50%);
+  display: inline-table;
+  font-weight: 300 !important;
+  max-width: 700px;
+}

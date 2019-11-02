@@ -9,6 +9,8 @@ class Api::V1::FibNumbersController < ApplicationController
   end
 
   def next
+
+    # you send it the current number and the previous number
     FibCalculator.update(current_user, 'next')
 
     render json: {
@@ -23,6 +25,14 @@ class Api::V1::FibNumbersController < ApplicationController
     render json: {
       status: :ok,
       number: fib_number.current,
+    }
+  end
+
+  def reset
+    FibCalculator.update(current_user, 'reset')
+
+    render json: {
+      status: :ok
     }
   end
 

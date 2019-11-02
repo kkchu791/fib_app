@@ -1,6 +1,5 @@
 class FibCalculator
-
-  def update(user, action)
+  def self.update(user, action)
     fib_num = user.fib_number
 
     if action == "next"
@@ -9,11 +8,17 @@ class FibCalculator
         next: fib_num.current + fib_num.next,
         previous: fib_num.current
       )
-    else
+    elsif action == "previous"
       fib_num.update(
         current: fib_num.previous,
         next: fib_num.current,
         previous: fib_num.current - fib_num.previous
+      )
+    else
+      fib_num.update(
+        current: 0,
+        next: 1,
+        previous: 0,
       )
     end
   end
