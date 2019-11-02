@@ -32,10 +32,6 @@ const FibActions = ({
       >
         Reset
       </Button>
-
-      <div className="auth-section">
-        Sign Up or Login
-      </div>
     </div>
   )
 }

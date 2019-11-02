@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './styles/fib_page.css';
 import FibDisplay from './FibDisplay'
 import FibActions from './FibActions'
@@ -6,28 +6,39 @@ import {
   getCurrentNumber,
   getNextNumber,
   getPreviousNumber,
-  resetNumber,
 } from '../api/fib.api.js'
 
 
 const FibPage = () => {
   const [log, setLog] = useState([])
+  const [position, setPosition] = useState(0)
+
+  useEffect(() => {
+    const scrollToBottom = () => {
+      let bottomElement = document.getElementById("bottom");
+      bottomElement.scrollIntoView({ behavior: "smooth" });
+    }
+
+    scrollToBottom();
+  }, [log]);
 
   const handleClick = async (type) => {
     if (type === "current") {
-      let currNum = await getCurrentNumber();
-      setLog(log.concat(`current -> ${currNum["number"]}`)) 
+      let currNum = await getCurrentNumber(position);
+      setLog(log.concat(`current -> ${currNum["number"]}`))
     } else if (type === "next") {
-      let nextNum = await getNextNumber();
+      let nextNum = await getNextNumber(position);
       setLog(log.concat(`next -> ${nextNum["number"]}`))
+      setPosition(position + 1)
     } else {
-      let prevNum = await getPreviousNumber();
+      let prevNum = await getPreviousNumber(position);
       setLog(log.concat(`previous -> ${prevNum["number"]}`))
+      setPosition(position - 1)
     }
   }
 
   const reset = () => {
-    resetNumber();
+    setPosition(0);
     setLog([]);
   }
 
