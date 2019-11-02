@@ -1,8 +1,16 @@
 import axios from 'axios';
 import API_BASE_URL from '../config/url_config'
 
-const getCurrentNumber = () => {  
-  return axios.get(`${API_BASE_URL}/api/v1/current`)
+const getCurrentNumber = (position) => {
+  return axios.get(`${API_BASE_URL}/api/v1/current?position=${position}`)
+      .then(({data}) => data)
+      .catch(error => {
+        console.log("error", error);
+      })
+}
+
+const getNextNumber = (position) => {  
+  return axios.get(`${API_BASE_URL}/api/v1/next?position=${position}`)
       .then(res => {
         return res.data;
       })
@@ -11,28 +19,8 @@ const getCurrentNumber = () => {
       })
 }
 
-const getNextNumber = () => {  
-  return axios.get(`${API_BASE_URL}/api/v1/next`)
-      .then(res => {
-        return res.data;
-      })
-      .catch(error => {
-        console.log("error", error);
-      })
-}
-
-const getPreviousNumber = () => {
-  return axios.get(`${API_BASE_URL}/api/v1/previous`)
-      .then(res => {
-        return res.data;
-      })
-      .catch(error => {
-        console.log("error", error);
-      })
-}
-
-const resetNumber = () => {  
-  return axios.get(`${API_BASE_URL}/api/v1/reset`)
+const getPreviousNumber = (position) => {
+  return axios.get(`${API_BASE_URL}/api/v1/previous?position=${position}`)
       .then(res => {
         return res.data;
       })
@@ -45,5 +33,4 @@ export {
   getCurrentNumber,
   getNextNumber,
   getPreviousNumber,
-  resetNumber,
 };
