@@ -1,6 +1,4 @@
 class Api::V1::FibNumbersController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def current
     render json: {
       status: :ok,

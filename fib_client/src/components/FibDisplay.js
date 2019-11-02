@@ -9,7 +9,7 @@ const FibDisplay = ({
       <div className="fib-display">
         { log.map((l, index) => {
           return (
-            <div key={index} className={index == log.length - 1 ? 'last' : ''}>{l}</div>
+            <div key={index} className={index === log.length - 1 ? 'last' : ''}>{l}</div>
           )
         })}
 

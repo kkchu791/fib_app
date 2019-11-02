@@ -31,9 +31,13 @@ const FibPage = () => {
       setLog(log.concat(`next -> ${nextNum["number"]}`))
       setPosition(position + 1)
     } else {
-      let prevNum = await getPreviousNumber(position);
-      setLog(log.concat(`previous -> ${prevNum["number"]}`))
-      setPosition(position - 1)
+      if (position === 0) {
+        setLog(log.concat(`previous -> Can't go past 0`))
+      } else {
+        let prevNum = await getPreviousNumber(position);
+        setLog(log.concat(`previous -> ${prevNum["number"]}`))
+        setPosition(position - 1)
+      }
     }
   }
 
