@@ -1,6 +1,7 @@
 import axios from 'axios';
-import API_BASE_URL from '../config/url_config'
+//import API_BASE_URL from '../config/url_config'
 
+const API_BASE_URL = "http://localhost:3001"
 const getCurrentNumber = (position) => {
   return axios.get(`${API_BASE_URL}/api/v1/current?position=${position}`)
       .then(({data}) => data)
