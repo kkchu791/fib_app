@@ -7,16 +7,10 @@ class FibonacciCacher
     fib_num = Rails.cache.read(position)
 
     if fib_num.nil?
-      fib_num = fibonacci[position]
+      fib_num = Fibonacci.new[position]
       Rails.cache.write(position, fib_num)
     end
 
     fib_num
-  end
-
-  private
-
-  def fibonacci
-    Fibonacci.new
   end
 end

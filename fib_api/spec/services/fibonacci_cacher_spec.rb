@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "fibonacci_cacher", type: :service do
+describe FibonacciCacher, type: :service do
 
   describe "#get" do
     context "when given a position" do

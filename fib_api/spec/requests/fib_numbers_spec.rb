@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'swagger_helper'
 
 describe "fib_numbers", type: :request do
   describe "GET /current" do
@@ -12,9 +13,16 @@ describe "fib_numbers", type: :request do
 
     context "when not given a position" do
       it "should return error" do
-        get '/api/v1/current'
+        expect { get '/api/v1/current' }.to raise_error{ ActionController::ParameterMissing }
+      end
+    end
+
+    context "when given a position and called 1000 times" do
+      it "should be able to return correct fibonacci number" do
+        1000.times { |position| get "/api/v1/current?position=#{position}"}
         json = JSON.parse(response.body)
-        expect(json["status"]).to eq("bad_request")
+        fib_number_at_1000_position = 26863810024485359386146727202142923967616609318986952340123175997617981700247881689338369654483356564191827856161443356312976673642210350324634850410377680367334151172899169723197082763985615764450078474174626
+        expect(json["number"]).to eq(fib_number_at_1000_position)
       end
     end
   end
@@ -30,9 +38,7 @@ describe "fib_numbers", type: :request do
 
     context "when not given a position" do
       it "should return error" do
-        get '/api/v1/next'
-        json = JSON.parse(response.body)
-        expect(json["status"]).to eq("bad_request")
+        expect { get '/api/v1/next' }.to raise_error{ ActionController::ParameterMissing }
       end
     end
   end
@@ -48,9 +54,7 @@ describe "fib_numbers", type: :request do
 
     context "when not given a position" do
       it "should return error" do
-        get '/api/v1/previous'
-        json = JSON.parse(response.body)
-        expect(json["status"]).to eq("bad_request")
+        expect { get '/api/v1/current' }.to raise_error{ ActionController::ParameterMissing }
       end
     end
   end
