@@ -4,6 +4,8 @@ class Api::V1::FibNumbersController < ApplicationController
       status: :ok,
       number: FibonacciCacher.get(position),
     }
+  rescue => e
+    render json: { status: 400, error: "invalid position given" }
   end
 
   def next
@@ -11,6 +13,8 @@ class Api::V1::FibNumbersController < ApplicationController
       status: :ok,
       number: FibonacciCacher.get(position + 1),
     }
+  rescue => e
+    render json: { status: 400, error: "invalid position given" }
   end
 
   def previous
@@ -18,6 +22,8 @@ class Api::V1::FibNumbersController < ApplicationController
       status: :ok,
       number: FibonacciCacher.get(position - 1),
     }
+  rescue => e
+      render json: { status: 400, error: "invalid position given" }
   end
 
   private
