@@ -1,6 +1,6 @@
 # Fib App
 
-Get the next or previous number of your fibanacci number
+Get the next or previous number of your current fibanacci number.
 
 
 ------------------
@@ -29,4 +29,16 @@ $ yarn start
 ```
 
 
-Give it a shot!
+## Implementation Notes
+
+I chose to do a couple things to optimize performance and meet requirements.
+
+- 
+
+
+## Future improvement notes
+
+I may 
+
+
+
