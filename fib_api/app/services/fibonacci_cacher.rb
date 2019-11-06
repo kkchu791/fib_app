@@ -1,16 +1,37 @@
 class FibonacciCacher
-  def self.get(position)
-    if position.blank?
-      raise "You need to pass in a position."
+  FIB_CACHE_KEY = "fib_cache"
+
+  class << self
+    def get(position)
+      validate_position(position)
+      fib_num = fib_cache[position]
+
+      if fib_num.blank?
+        fib_num = fibonacci_library_instance[position]
+        Rails.cache.write(FIB_CACHE_KEY, fib_cache.merge(position => fib_num))
+      end
+
+      fib_num
     end
 
-    fib_num = Rails.cache.read(position)
-
-    if fib_num.nil?
-      fib_num = Fibonacci.new[position]
-      Rails.cache.write(position, fib_num)
+    def fibonacci_library_instance
+      @@fibonacci_library_instance ||= Fibonacci.new
     end
 
-    fib_num
+    private
+
+    def validate_position(position)
+      if !position.is_a?(Integer)
+        raise ArgumentError, "must pass an integer value"
+      end
+
+      if position.negative?
+        raise ArgumentError, "must be a non negative integer"
+      end
+    end
+
+    def fib_cache
+      Rails.cache.fetch(FIB_CACHE_KEY) || {}
+    end
   end
 end

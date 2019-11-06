@@ -8,7 +8,6 @@ RSpec.describe 'api/v1/fib_numbers', type: :request do
       response(200, 'successful') do
 
         after do |example|
-          byebug
           example.metadata[:response][:examples] = { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
         end
         run_test!

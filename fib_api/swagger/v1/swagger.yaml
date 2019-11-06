@@ -15,9 +15,14 @@ paths:
         description: "The nth position of the fibonacci number"
         schema:
           type: integer
+          examples:
+            position-example: 1
       responses:
-        '200':
-          description: successful
+        200:
+          content:
+            application/json:
+              example:
+                number: 1
         '400':
           description: invalid position given
   "/api/v1/next":
